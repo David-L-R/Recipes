@@ -3,8 +3,11 @@ dotenv.config();
 import recipeRouter from "./routes/recipes.js";
 import { errorHandler } from "./middleware/error.js";
 import express from "express";
+import { connectDB } from "./config/db.js";
+
 const { PORT } = process.env;
 
+connectDB();
 const app = express();
 
 app.use(express.json());
