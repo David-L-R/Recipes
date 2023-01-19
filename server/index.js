@@ -3,16 +3,9 @@ import recipesRouter from "./routes/recipesRoutes.js";
 
 // init express application
 const app = express();
-
-// run that express on a port
 const PORT = 5000;
 
-// process routes
-// david.com/api/users
-// HTTP
-// headers
-// body
-// GET | POST | PUT | DELETE (CRUD)
+// ROUTES
 app.use("/api/recipes", recipesRouter);
 
 // listen to the port, to make sure that the app is running
