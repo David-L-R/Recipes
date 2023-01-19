@@ -2,56 +2,49 @@ import asyncHandler from "express-async-handler";
 import Recipe from "../models/recipeModel.js";
 
 const getAllRecipes = asyncHandler(async (req, res) => {
-  try {
-    const recipes = await Recipe.find();
-    console.log(recipes);
-  } catch (err) {
-    res.status(err.statusCode);
-    throw new Error(err.message);
-  }
+  const recipes = await Recipe.find();
+  res.status(200).json(recipes);
 });
-const getRecipeById = asyncHandler(async (req, res) => {
-  try {
-    console.log(recipes);
-
-    const recipes = await Recipe.findById(req.params.id);
-
-    if (!req.body.text) {
-      res.status(400);
-      //   const error = new Error("an error");
-      //   error.status = 400;
-      //   throw error;
-      throw new Error("an error");
-    }
-
-    res.send({ message: req.body });
-  } catch (err) {
-    //     console.log(err.status);
-    //     res.status(err.status).send({
-    //       message: err.message,
-    //       stack: err.stack,
-    //   });
-    throw err;
-  }
+const getRecipeById = asyncHandler(async (req, res, next) => {
+  const recipe = await Recipe.findById(req.params.id);
+  res.status(200).json(recipe);
 });
-const addNewRecipe = async (req, res) => res.send("post " + req.params.id);
-const replaceRecipe = async (req, res) => {
-  const updatedRecipe = await Recipe.findByIdAndUpdate(
-    req.params.id,
-    req.body,
-    {
-      new: true,
-    }
-  );
+const addNewRecipe = async (req, res, next) => {
+  if (!req.body) {
+    throw new Error("Request body is missing");
+  }
+
+  console.log(req.body);
+
+  try {
+    const newRecipe = await Recipe.create(req.body);
+    res.status(201).json(newRecipe);
+  } catch (err) {
+    next(err);
+  }
 };
-const updateRecipe = async (req, res) => res.send("patch " + req.params.id);
-const deleteRecipe = async (req, res) => res.send("delete " + req.params.id);
+
+const updateRecipe = async (req, res) => {
+  const { id } = req.params;
+  const updatedRecipe = await Recipe.findByIdAndUpdate(id, req.body, {
+    new: true,
+  });
+
+  res.status(200).json(updatedRecipe);
+};
+
+const deleteRecipe = async (req, res) => {
+  const recipe = await Recipe.findById(req.params.id);
+
+  await recipe.remove();
+
+  res.status(200).json({ id });
+};
 
 export {
   getAllRecipes,
   getRecipeById,
   addNewRecipe,
-  replaceRecipe,
   updateRecipe,
   deleteRecipe,
 };
