@@ -9,6 +9,9 @@ const PORT = config.server.port || 5000;
 
 DBconnect();
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
 // ROUTES
 app.use("/api/recipes", recipesRouter);
 
