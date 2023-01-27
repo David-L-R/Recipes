@@ -1,0 +1,15 @@
+import mongoose from "mongoose";
+
+const recipeSchema = mongoose.Schema({
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: "User",
+  },
+  title: {
+    type: String,
+    required: [true, "Recipe title is required"],
+  },
+});
+
+export default mongoose.model("Recipe", recipeSchema);
