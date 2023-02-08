@@ -6,6 +6,13 @@ const recipeSchema = mongoose.Schema({
     required: true,
     ref: "User",
   },
+  // favorites: [String], //string[]
+  favorites: [
+    {
+      charId: String,
+      description: String,
+    },
+  ],
   title: {
     type: String,
     required: [true, "Recipe title is required"],
