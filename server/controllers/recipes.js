@@ -14,8 +14,6 @@ const addNewRecipe = async (req, res, next) => {
     throw new Error("Request body is missing");
   }
 
-  console.log(req.body);
-
   try {
     const newRecipe = await Recipe.create(req.body);
     res.status(201).json(newRecipe);
