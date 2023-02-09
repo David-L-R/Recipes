@@ -39,21 +39,32 @@ const registerUser = asyncHandler(async (req, res) => {
     token: generateToken(newUser._id),
   });
 });
+
 const loginUser = asyncHandler(async (req, res) => {
-  const user = await User.findOne({ email });
+  try {
+    const { email, password } = req.body;
 
-  if (!user) {
-    res.status(400).json("User does not exist");
+    const user = await User.findOne({ email }).lean();
+
+    if (!user) {
+      res.status(400);
+      throw new Error("User does not exist");
+    }
+
+    if (!(await bcrypt.compare(password, user.password))) {
+      res.status(400).json("Email and password do not match");
+    }
+
+    delete user.password;
+
+    res.status(200).json({ user, token: generateToken(user._id) });
+  } catch (err) {
+    console.log(err);
+    throw new Error(err.message);
   }
-
-  if (!(await bcrypt.compare(password, user.password))) {
-    res.status(400).json("Email and password do not match");
-  }
-
-  res.status(200).json({});
 });
 const getUser = asyncHandler(async (req, res) => {
-  res.status(200).json("getUser");
+  res.status(200).json(req.user);
 });
 
 const generateToken = (id) => {
