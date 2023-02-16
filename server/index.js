@@ -14,8 +14,11 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+// ROUTES
 app.use("/api/recipes", recipeRouter);
 app.use("/api/users", userRouter);
+
+// ERROR HANDLERS
 app.use(errorHandler);
 
 app.listen(PORT, () => console.log(`Port is running on: ${PORT}`));
