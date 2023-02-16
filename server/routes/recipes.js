@@ -7,14 +7,15 @@ import {
   updateRecipe,
   deleteRecipe,
 } from "../controllers/recipes.js";
+import { protect } from "../middleware/auth.js";
 
-router.route("/").get(getAllRecipes).post(addNewRecipe);
+router.route("/").get(getAllRecipes).post(protect, addNewRecipe);
 
 router
   .route("/:id")
   .get(getRecipeById)
-  .patch(updateRecipe)
-  .delete(deleteRecipe);
+  .put(protect, updateRecipe)
+  .delete(protect, deleteRecipe);
 
 router.route("/category/:name").get((req, res) => {});
 

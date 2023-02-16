@@ -6,7 +6,6 @@ const recipeSchema = mongoose.Schema({
     required: true,
     ref: "User",
   },
-  // favorites: [String], //string[]
   favorites: [
     {
       charId: String,
