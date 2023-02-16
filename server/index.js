@@ -15,7 +15,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use("/api/recipes", recipeRouter);
-app.use("/api/users", userRouter);
 app.use(errorHandler);
 
 app.listen(PORT, () => console.log(`Port is running on: ${PORT}`));
