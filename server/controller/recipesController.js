@@ -17,10 +17,7 @@ export const getRecipeById = (req, res) => {
 //
 
 export const createRecipe = async (req, res) => {
-  // // frontend (React)
-  // axios.post("http://localhost:5000/api/recipes", {
-  //   title: "hot sexy winter soup",
-  // });
+  const { user } = req;
 
   try {
     const { title } = req.body;
@@ -30,14 +27,19 @@ export const createRecipe = async (req, res) => {
       throw new Error("Title is required");
     }
 
+    if (!user) {
+      res.status(401);
+      throw new Error("Unauthorized");
+    }
+
     const recipe = await Recipe.create({
       title,
+      userId: user.id,
     });
 
     // 201: new entry to the database added
     res.status(201).json(recipe);
   } catch (err) {
-    console.log(err.status);
     res.status(err.statusCode || 500).json({
       message: err.message,
       stack: err.stack, //in developement

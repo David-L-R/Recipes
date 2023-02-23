@@ -3,58 +3,67 @@ import jwt from "jsonwebtoken";
 import User from "../model/userModel.js";
 import { config } from "../config/index.js";
 
-export const register = async (req, res) => {
+export const register = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
 
+  // check if anything is missing
+  // 400 BAD REQUEST
+  if (!name || !email || !password) {
+    res.status(400);
+    throw new Error("Some fields are missing");
+  }
+
+  // check if the email unique
+  // find a user using this email
+  // if user was found => error
+  // 400 BAD REQUEST
+  // const user = User.findOne({ email: email });
+  const user = await User.findOne({ email }).lean();
+
+  if (user) {
+    res.status(400);
+    throw new Error("User already exist");
+  }
+
+  // hash the password
+  // math => 3rd party encryption library
+  const salt = await bcrypt.genSalt();
+  const hash = await bcrypt.hash(password, salt);
+
+  // create a new user
+  const newUser = await User.create({
+    name,
+    email,
+    password: hash,
+  });
+
+  if (!newUser) {
+    res.status(400);
+    throw new Error("User was not created successfully");
+  }
+
+  // send the user and a token back
+  res.status(201).json({
+    _id: newUser.id,
+    name: newUser.name,
+    email: newUser.email,
+    token: createToken(newUser.id),
+  });
+  // } catch (err) {
+  //   res.json({
+  //     message: err.message ? err.message : "Something went wrong",
+  //     stack: err.stack ? err.stack : null,
+  //   });
+  // }
+});
+
+const asyncHandler = (fn) => async (req, res, next) => {
+  // Promise.resolve(fn(req, res, next)).catch(next);
+
   try {
-    // check if anything is missing
-    // 400 BAD REQUEST
-    if (!name || !email || !password) {
-      res.status(400);
-      throw new Error("Some fields are missing");
-    }
-
-    // check if the email unique
-    // find a user using this email
-    // if user was found => error
-    // 400 BAD REQUEST
-    // const user = User.findOne({ email: email });
-    const user = await User.findOne({ email }).lean();
-
-    if (user) {
-      res.status(400);
-      throw new Error("User already exist");
-    }
-
-    // hash the password
-    // math => 3rd party encryption library
-    const salt = await bcrypt.genSalt();
-    const hash = await bcrypt.hash(password, salt);
-
-    // create a new user
-    const newUser = await User.create({
-      name,
-      email,
-      password: hash,
-    });
-
-    if (!newUser) {
-      res.status(400);
-      throw new Error("User was not created successfully");
-    }
-
-    // send the user and a token back
-    res.status(201).json({
-      _id: newUser.id,
-      name: newUser.name,
-      email: newUser.email,
-      token: createToken(newUser.id),
-    });
-  } catch (err) {
-    res.json({
-      message: err.message ? err.message : "Something went wrong",
-      stack: err.stack ? err.stack : null,
-    });
+    fn(req, res, next);
+  } catch {
+    next(err);
   }
 };
 
@@ -99,7 +108,7 @@ export const login = async (req, res) => {
   }
 };
 export const getUserInfo = async (req, res) => {
-  res.status(200).json("user");
+  res.status(200).json(req.user);
 };
 
 // create a function that creates a valid token
