@@ -7,7 +7,8 @@ const register = async (user) => {
   const res = await axios.post(SERVER_URL + API_URL + "register", user);
 
   if (res.data) {
-    localStorage.setItem("user", JSON.stringify(res.data));
+    localStorage.setItem("user", JSON.stringify(res.data.user));
+    localStorage.setItem("token", JSON.stringify(res.data.token));
   }
 
   return res.data;
@@ -17,7 +18,8 @@ const login = async (user) => {
   const res = await axios.post(SERVER_URL + API_URL + "login", user);
 
   if (res.data) {
-    localStorage.setItem("user", JSON.stringify(res.data));
+    localStorage.setItem("user", JSON.stringify(res.data.user));
+    localStorage.setItem("token", JSON.stringify(res.data.token));
   }
 
   return res.data;

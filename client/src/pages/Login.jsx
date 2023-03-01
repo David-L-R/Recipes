@@ -1,10 +1,15 @@
-import React, { useRef } from "react";
+import React from "react";
 import { Form } from "../components";
+import { useDispatch } from "react-redux";
+import { login } from "../features/auth/authSlice";
+import { AuthWrapper } from "../components/authWrapper";
 
 export const Login = () => {
+  const dispatch = useDispatch();
   return (
-    <div>
-      <Form />
-    </div>
+    <AuthWrapper>
+      <h1>Login</h1>
+      <Form onSubmit={(user) => dispatch(login(user))} />
+    </AuthWrapper>
   );
 };

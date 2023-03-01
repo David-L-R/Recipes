@@ -22,7 +22,7 @@ const getRecipeById = asyncHandler(async (req, res, next) => {
 });
 
 const addNewRecipe = asyncHandler(async (req, res, next) => {
-  if (Object.keys(req.body).length === 0) {
+  if (req.body && Object.keys(req.body).length === 0) {
     res.status(400);
     return next(new Error("Request body is missing"));
   }

@@ -3,6 +3,7 @@ import authService from "./authService";
 
 const initialState = {
   user: JSON.parse(localStorage.getItem("user")) ?? null,
+  token: JSON.parse(localStorage.getItem("token")) ?? null,
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -33,6 +34,7 @@ export const register = createAsyncThunk(
       const message =
         err?.response?.data?.message || err.message || err.toString();
       localStorage.removeItem("user");
+      localStorage.removeItem("token");
       return rejectWithValue(message);
     }
   }
@@ -57,18 +59,38 @@ export const authSlice = createSlice({
       .addCase(register.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(register.fulfilled, (state, action) => {
+      .addCase(register.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.isSuccess = true;
         state.isError = false;
         state.message = "Registration Successful";
-        state.user = action.payload;
+        state.user = payload.user;
+        state.token = payload.token;
       })
       .addCase(register.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload || action.error.message;
         state.user = null;
+        state.token = null;
+      })
+      .addCase(login.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(login.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isError = false;
+        state.message = "Login Successful";
+        state.user = payload.user;
+        state.token = payload.token;
+      })
+      .addCase(login.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload || action.error.message;
+        state.user = null;
+        state.token = null;
       });
   },
 });
