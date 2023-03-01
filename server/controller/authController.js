@@ -2,6 +2,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import User from "../model/userModel.js";
 import { config } from "../config/index.js";
+import asyncHandler from "express-async-handler";
 
 export const register = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
@@ -56,16 +57,6 @@ export const register = asyncHandler(async (req, res) => {
   //   });
   // }
 });
-
-const asyncHandler = (fn) => async (req, res, next) => {
-  // Promise.resolve(fn(req, res, next)).catch(next);
-
-  try {
-    fn(req, res, next);
-  } catch {
-    next(err);
-  }
-};
 
 export const login = async (req, res) => {
   // email password
