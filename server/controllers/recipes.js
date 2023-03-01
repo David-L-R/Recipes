@@ -46,11 +46,7 @@ const addNewRecipe = asyncHandler(async (req, res, next) => {
 const updateRecipe = asyncHandler(async (req, res, next) => {
   const { id } = req.params;
 
-  console.log(req.user._id);
-
   const recipeToUpdate = await Recipe.findById(id);
-
-  console.log(recipeToUpdate);
 
   try {
     if (req.user._id.toString() !== recipeToUpdate.userId.toString()) {

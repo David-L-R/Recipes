@@ -6,8 +6,6 @@ const SERVER_URL = "http://localhost:5000";
 const register = async (user) => {
   const res = await axios.post(SERVER_URL + API_URL + "register", user);
 
-  console.log(res);
-
   if (res.data) {
     localStorage.setItem("user", JSON.stringify(res.data));
   }

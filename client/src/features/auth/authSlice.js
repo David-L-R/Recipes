@@ -9,29 +9,38 @@ const initialState = {
   message: "",
 };
 
-const login = createAsyncThunk("auth/login", async (user, thunkAPi) => {
-  try {
-    return await authService.login(user);
-  } catch (err) {
-    const message =
-      (err.response && err.response.data && err.response.data.message) ||
-      err.message ||
-      err.toString();
+const REGISTER = "auth/register";
 
-    return thunkAPi.rejectWithValue(message);
+export const login = createAsyncThunk(
+  "auth/login",
+  async (user, { rejectWithValue }) => {
+    try {
+      const loginUser = await authService.login(user);
+      console.log("login user", loginUser);
+      return loginUser;
+    } catch (err) {
+      const message =
+        (err.response && err.response.data && err.response.data.message) ||
+        err.message ||
+        err.toString();
+
+      console.log("Typeof Message", typeof message);
+
+      return rejectWithValue(message);
+    }
   }
-});
+);
 
 export const register = createAsyncThunk(
-  "auth/register",
-  async (user, thunkAPi) => {
+  REGISTER,
+  async (user, { rejectWithValue }) => {
     try {
       return await authService.register(user);
     } catch (err) {
       const message =
         err?.response?.data?.message || err.message || err.toString();
-      console.log("Message", message);
-      return thunkAPi.rejectWithValue(message);
+      localStorage.removeItem("user");
+      return rejectWithValue(message);
     }
   }
 );
@@ -49,24 +58,25 @@ export const authSlice = createSlice({
     logout: (state) => {
       state.user = null;
     },
-    extraReducers: (builder) => {
-      builder
-        .addCase(register.pending, (state) => {
-          state.isLoading = true;
-        })
-        .addCase(register.fulfilled, (state, action) => {
-          console.log("fullfilled", action.payload);
-          state.isLoading = false;
-          state.isSuccess = true;
-          state.user = action.payload;
-        })
-        .addCase(register.rejected, (state, action) => {
-          console.log(action.payload);
-          state.isLoading = false;
-          state.isError = true;
-          state.message = action.payload;
-        });
-    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(register.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(register.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isError = false;
+        state.message = "Registration Successful";
+        state.user = action.payload;
+      })
+      .addCase(register.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload || action.error.message;
+        state.user = null;
+      });
   },
 });
 
