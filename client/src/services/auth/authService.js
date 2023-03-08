@@ -9,7 +9,7 @@ const register = async (user) => {
 
   const newUser = await response.json();
 
-  if (response.status !== 200) {
+  if (response.status !== 200 && response.status !== 201) {
     console.log(newUser.message);
     throw new Error(newUser.message);
   }
