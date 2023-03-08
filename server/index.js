@@ -4,10 +4,17 @@ import authRouter from "./routes/authRouter.js";
 import { DBconnect } from "./config/db.js";
 import { config } from "./config/index.js";
 import { errorHandler } from "./middleware/errorMiddleware.js";
+import cors from "cors";
 
 // init express application
 const app = express();
 const PORT = config.server.port || 5000;
+
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+  })
+);
 
 DBconnect();
 
