@@ -1,23 +1,45 @@
 const register = async (user) => {
-  const response = await fetch("http://localhost:5000/api/auth/register", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(user),
-  });
+  const response = await fetch(
+    `${process.env.REACT_APP_SERVER_URL}/api/auth/register`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    }
+  );
 
-  const newUser = await response.json();
-
-  console.log(newUser);
+  const data = await response.json();
 
   if (response.status !== 201) {
-    throw new Error(newUser.message);
+    throw new Error(data.message);
   }
 
-  return newUser;
+  return data;
 };
 
-const authService = { register };
+const login = async (user) => {
+  const response = await fetch(
+    `${process.env.REACT_APP_SERVER_URL}/api/auth/login`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    }
+  );
+
+  const data = await response.json();
+
+  if (response.status !== 200) {
+    throw new Error(data.message);
+  }
+
+  return data;
+};
+
+const authService = { register, login };
 
 export default authService;

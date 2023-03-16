@@ -10,8 +10,7 @@ const initialState = {
   message: "",
 };
 
-// register
-
+// register action
 const register = createAsyncThunk(
   "auth/register",
   async (user, { rejectWithValue }) => {
@@ -24,6 +23,17 @@ const register = createAsyncThunk(
 );
 
 // login
+
+const login = createAsyncThunk(
+  "auth/login",
+  async (user, { rejectWithValue }) => {
+    try {
+      return await authService.login(user);
+    } catch (err) {
+      return rejectWithValue(err);
+    }
+  }
+);
 
 export const authSlice = createSlice({
   name: "auth",
@@ -56,10 +66,29 @@ export const authSlice = createSlice({
       state.error = true;
       state.message = payload.message;
     },
+    [login.pending]: (state) => {
+      state.loading = true;
+    },
+    [login.fulfilled]: (state, { payload }) => {
+      localStorage.setItem("user", JSON.stringify(payload.user));
+      localStorage.setItem("token", JSON.stringify(payload.token));
+      state.user = payload.user;
+      state.token = payload.token;
+      state.loading = false;
+      state.success = true;
+      state.error = false;
+      state.message = "user logged in successfully";
+    },
+    [login.rejected]: (state, { payload }) => {
+      state.loading = false;
+      state.success = false;
+      state.error = true;
+      state.message = payload.message;
+    },
   },
 });
 
 const { logout } = authSlice.actions;
 
-export { register, logout };
+export { login, register, logout };
 export default authSlice.reducer;

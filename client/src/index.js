@@ -7,6 +7,8 @@ import reportWebVitals from "./reportWebVitals";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Register } from "./pages/register";
+import { Login } from "./pages/login";
+import { Dashboard } from "./pages/dashboard";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
@@ -19,6 +21,14 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <Register />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard />,
   },
 ]);
 

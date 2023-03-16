@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
+import { Form } from "../components";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Form } from "../components";
 
-export const Register = () => {
+export const Login = () => {
   const { success, loading, token, user } = useSelector((state) => state.auth);
 
   const navigate = useNavigate();
@@ -15,6 +15,5 @@ export const Register = () => {
   }, [success, user, token, navigate]);
 
   if (loading) return <p>Loading...</p>;
-
-  return <Form />;
+  return <Form isLoginPage={true} />;
 };
