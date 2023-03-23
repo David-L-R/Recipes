@@ -9,6 +9,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Register } from "./pages/register";
 import { Login } from "./pages/login";
 import { Dashboard } from "./pages/dashboard";
+import { Auth } from "./components/Auth/Auth";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
@@ -28,7 +29,12 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboard />,
+    element: (
+      // HOC Higher Order Component is an alternative
+      <Auth>
+        <Dashboard />
+      </Auth>
+    ),
   },
 ]);
 
