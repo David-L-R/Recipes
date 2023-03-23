@@ -1,46 +1,32 @@
-import React, { useRef } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { register, login } from "../../services/auth/authSlice";
 
-export const Form = ({ isLoginPage }) => {
+export const Form = ({ inputs, action }) => {
   const error = useSelector((state) => state.auth.error);
   const message = useSelector((state) => state.auth.message);
-
-  const nameRef = useRef();
-  const emailRef = useRef();
-  const passwordRef = useRef();
 
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const name = nameRef?.current?.value;
-    const email = emailRef.current.value;
-    const password = passwordRef.current.value;
+    const values = {};
+    inputs.forEach((input) => {
+      values[input.name] = input.ref.current.value;
+    });
 
-    if (isLoginPage) {
-      console.log("login");
-      return dispatch(login({ email, password }));
-    }
-
-    dispatch(register({ name, email, password }));
+    dispatch(action(values));
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <h1>{isLoginPage ? "Login" : "Register"}</h1>
       {error && <p>{message}</p>}
-      {!isLoginPage && (
+      {inputs.map((input) => (
         <>
-          <label>Name</label>
-          <input type='text' ref={nameRef} />
+          <label htmlFor={input.name}>{input.label}</label>
+          <input name={input.name} type={input.type} ref={input.ref} />
         </>
-      )}
-      <label>Email</label>
-      <input type='email' ref={emailRef} />
-      <label>Password</label>
-      <input type='password' ref={passwordRef} />
+      ))}
       <button type='submit'>Submit</button>
     </form>
   );

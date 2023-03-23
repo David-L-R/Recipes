@@ -1,16 +1,14 @@
 import React, { useEffect, useRef } from "react";
-import { Form } from "../components";
 import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import { login } from "../services/auth/authSlice";
+import { useNavigate } from "react-router-dom";
+// import { forgotPassword } from "../services/auth/authSlice";
+import { Form } from "../components";
 
-export const Login = () => {
+export const ForgotPassword = () => {
   const { success, loading, token, user } = useSelector((state) => state.auth);
-
   const navigate = useNavigate();
 
   const emailRef = useRef();
-  const passwordRef = useRef();
 
   const inputs = [
     {
@@ -18,12 +16,6 @@ export const Login = () => {
       label: "Email",
       type: "email",
       ref: emailRef,
-    },
-    {
-      name: "password",
-      label: "Password",
-      type: "password",
-      ref: passwordRef,
     },
   ];
 
@@ -34,15 +26,11 @@ export const Login = () => {
   }, [success, user, token, navigate]);
 
   if (loading) return <p>Loading...</p>;
+
   return (
     <>
-      <h1>Login</h1>
-
-      <Form inputs={inputs} action={login} />
-      <p>
-        Don't have an account? <Link to='/register'>Register</Link>
-      </p>
-      <Link to='/forgot-password'>Forgot your password?</Link>
+      <h1>Forgot Password</h1>
+      <Form inputs={inputs} action={() => {}} />
     </>
   );
 };

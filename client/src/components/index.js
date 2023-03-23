@@ -1,3 +1,3 @@
-import { Form } from "./Form/form";
+import { Form } from "./Form/Form";
 
 export { Form };

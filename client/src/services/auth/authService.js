@@ -1,3 +1,24 @@
+const forgotPassword = async (email) => {
+  const response = await fetch(
+    `${process.env.REACT_APP_SERVER_URL}/api/auth/forgot-password`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email }),
+    }
+  );
+
+  const data = await response.json();
+
+  if (response.status !== 200) {
+    throw new Error(data.message);
+  }
+
+  return data;
+};
+
 const register = async (user) => {
   const response = await fetch(
     `${process.env.REACT_APP_SERVER_URL}/api/auth/register`,
