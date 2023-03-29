@@ -6,7 +6,7 @@ const forgotPassword = async (email) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email }),
+      body: JSON.stringify(email),
     }
   );
 
@@ -61,6 +61,6 @@ const login = async (user) => {
   return data;
 };
 
-const authService = { register, login };
+const authService = { register, login, forgotPassword };
 
 export default authService;

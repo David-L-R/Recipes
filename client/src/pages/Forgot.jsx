@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 // import { forgotPassword } from "../services/auth/authSlice";
 import { Form } from "../components";
+import { forgotPassword } from "../services/auth/authSlice";
 
 export const ForgotPassword = () => {
   const { success, loading, token, user } = useSelector((state) => state.auth);
@@ -20,9 +21,11 @@ export const ForgotPassword = () => {
   ];
 
   useEffect(() => {
-    if (success || (user && token)) {
-      navigate("/dashboard");
-    }
+    // if (success || (user && token)) {
+    // navigate("/dashboard");
+    // }
+
+    console.log("success", success);
   }, [success, user, token, navigate]);
 
   if (loading) return <p>Loading...</p>;
@@ -30,7 +33,7 @@ export const ForgotPassword = () => {
   return (
     <>
       <h1>Forgot Password</h1>
-      <Form inputs={inputs} action={() => {}} />
+      <Form inputs={inputs} action={forgotPassword} />
     </>
   );
 };

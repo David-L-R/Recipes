@@ -14,6 +14,10 @@ const userSchema = mongoose.Schema({
     type: String,
     required: [true, "User must have a password"],
   },
+  resetToken: {
+    type: String,
+    required: false,
+  },
 });
 
 export default mongoose.model("User", userSchema);

@@ -3,6 +3,54 @@ import jwt from "jsonwebtoken";
 import User from "../model/userModel.js";
 import { config } from "../config/index.js";
 import asyncHandler from "express-async-handler";
+import { transporter } from "../config/email.js";
+
+export const forgotPassword = asyncHandler(async (req, res) => {
+  const { email } = req.body;
+
+  // check if the email is valid
+  // 400 BAD REQUEST
+  if (!email) {
+    res.status(400);
+
+    throw new Error("Email is required");
+  }
+
+  // check if the email exist in the database
+  // 400 BAD REQUEST
+  const user = await User.findOne({ email });
+
+  if (!user) {
+    res.status(400);
+    throw new Error("User does not exist");
+  }
+
+  // create a reset token
+  user.resetToken = createToken(user._id);
+
+  // save the reset token in the database
+  const { resetToken } = await user.save();
+
+  const FRONTEND_URL = "http://localhost:3000/reset-password/";
+
+  // send the reset token to the user email
+  const mailOptions = {
+    from: "noreply@example.com",
+    to: email,
+    subject: "Password Reset Token",
+    text: `If you wanted to reset your password, click on thie link ${FRONTEND_URL}${resetToken}. Please use it to reset your password.`,
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      res.status(500);
+      throw new Error("Error sending reset token email");
+    } else {
+      console.log(info);
+      res.status(200).json({ message: "Reset token sent to the user's email" });
+    }
+  });
+});
 
 export const register = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
@@ -102,7 +150,7 @@ export const login = async (req, res) => {
     });
   }
 };
-export const getUserInfo = async (req, res) => {
+export const getUser = async (req, res) => {
   res.status(200).json(req.user);
 };
 

@@ -16,6 +16,7 @@ const forgotPassword = createAsyncThunk(
     try {
       return await authService.forgotPassword(email);
     } catch (err) {
+      console.log(err);
       return rejectWithValue(err);
     }
   }
