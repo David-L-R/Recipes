@@ -11,6 +11,8 @@ import { Login } from "./pages/Login";
 import { Dashboard } from "./pages/Dashboard";
 import { Auth } from "./components/Auth/Auth";
 import { ForgotPassword } from "./pages/Forgot";
+import { Success } from "./pages/Success";
+import { ResetPassword } from "./pages/Reset";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
@@ -19,6 +21,10 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+  },
+  {
+    path: "/success",
+    element: <Success />,
   },
   {
     path: "/register",
@@ -31,6 +37,10 @@ const router = createBrowserRouter([
   {
     path: "/forgot-password",
     element: <ForgotPassword />,
+  },
+  {
+    path: "/reset-password/:token",
+    element: <ResetPassword />,
   },
   {
     path: "/dashboard",

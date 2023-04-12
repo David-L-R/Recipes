@@ -1,3 +1,4 @@
 import { Form } from "./Form/Form";
+import { Auth } from "./Auth/Auth";
 
-export { Form };
+export { Form, Auth };

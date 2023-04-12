@@ -10,13 +10,28 @@ const initialState = {
   message: "",
 };
 
+const resetPassword = createAsyncThunk(
+  "auth/reset-password",
+  async ({ password, confirmPassword, token }, { rejectWithValue }) => {
+    try {
+      return await authService.resetPassword({
+        password,
+        confirmPassword,
+        token,
+      });
+    } catch (err) {
+      console.log(err);
+      return rejectWithValue(err);
+    }
+  }
+);
+
 const forgotPassword = createAsyncThunk(
-  "auth/forgotPassword",
+  "auth/forgot-password",
   async (email, { rejectWithValue }) => {
     try {
       return await authService.forgotPassword(email);
     } catch (err) {
-      console.log(err);
       return rejectWithValue(err);
     }
   }
@@ -117,10 +132,25 @@ export const authSlice = createSlice({
       state.error = true;
       state.message = payload.message;
     },
+    [resetPassword.pending]: (state) => {
+      state.loading = true;
+    },
+    [resetPassword.fulfilled]: (state, { payload }) => {
+      state.loading = false;
+      state.success = true;
+      state.error = false;
+      state.message = payload.message;
+    },
+    [resetPassword.rejected]: (state, { payload }) => {
+      state.loading = false;
+      state.success = false;
+      state.error = true;
+      state.message = payload.message;
+    },
   },
 });
 
 const { logout } = authSlice.actions;
 
-export { login, register, logout, forgotPassword };
+export { login, register, logout, forgotPassword, resetPassword };
 export default authSlice.reducer;

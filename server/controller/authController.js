@@ -5,6 +5,25 @@ import { config } from "../config/index.js";
 import asyncHandler from "express-async-handler";
 import { transporter } from "../config/email.js";
 
+export const resetPassword = asyncHandler(async (req, res) => {
+  const { password } = req.body;
+  const { user } = req;
+
+  console.log(user);
+  console.log("passwrod");
+
+  const salt = await bcrypt.genSalt(10);
+  user.password = await bcrypt.hash(password, salt);
+
+  user.resetToken = null;
+
+  await user.save();
+
+  console.log("saved");
+
+  return res.status(200).json({ message: "Password reset successfully" });
+});
+
 export const forgotPassword = asyncHandler(async (req, res) => {
   const { email } = req.body;
 

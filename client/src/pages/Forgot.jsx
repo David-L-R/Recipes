@@ -21,11 +21,9 @@ export const ForgotPassword = () => {
   ];
 
   useEffect(() => {
-    // if (success || (user && token)) {
-    // navigate("/dashboard");
-    // }
-
-    console.log("success", success);
+    if (success || (user && token)) {
+      navigate("/success");
+    }
   }, [success, user, token, navigate]);
 
   if (loading) return <p>Loading...</p>;
