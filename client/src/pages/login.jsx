@@ -28,7 +28,7 @@ export const Login = () => {
   ];
 
   useEffect(() => {
-    if (success || (user && token)) {
+    if (user && token) {
       navigate("/dashboard");
     }
   }, [success, user, token, navigate]);
