@@ -1,0 +1,106 @@
+[
+  {
+    "title": "Classic Tomato and Basil Bruschetta",
+    "userId": "60efabc1234a56def7890123",
+    "time": {
+      "prepTime": 15,
+      "cookTime": 5
+    },
+    "servings": 6,
+    "tags": ["appetizer", "vegetarian", "Italian"],
+    "ingredients": [
+      {
+        "amount": 6,
+        "unit": "slices",
+        "optional": false,
+        "id": "60901234567a89123c450123"
+      },
+      {
+        "amount": 2,
+        "unit": "cups",
+        "optional": false,
+        "id": "6012346789a0123de450127"
+      },
+      {
+        "amount": 1,
+        "unit": "cup",
+        "optional": false,
+        "id": "6056f0123a89a0123450128"
+      },
+      {
+        "amount": 1,
+        "unit": "clove",
+        "optional": false,
+        "id": "60abc0123a890127e45012f"
+      },
+      {
+        "amount": 2,
+        "unit": "tablespoons",
+        "optional": false,
+        "id": "60589de450127e01234f012"
+      },
+      {
+        "amount": 1,
+        "unit": "pinch",
+        "optional": true,
+        "id": "60345a0123a890127e012gh"
+      }
+    ],
+    "steps": [
+      "Preheat oven to 350°F (180°C).",
+      "Chop tomatoes and basil, then mince garlic.",
+      "In a bowl, combine tomatoes, basil, and garlic.",
+      "Add olive oil, salt, and pepper to taste, then mix well.",
+      "Place the bread slices on a baking sheet.",
+      "Toast bread slices in the oven for 3-5 minutes or until golden brown.",
+      "Remove bread from the oven and top each slice with the tomato mixture.",
+      "Serve immediately."
+    ],
+    "basedOn": "60903dabcdef0123c456012"
+  },
+  {
+    "title": "Veggie Stir-Fry",
+    "userId": "60d25f51254a79325dd",
+    "time": {
+      "prepTime": 15,
+      "cookTime": 10
+    },
+    "servings": 4,
+    "tags": ["vegetarian", "stir-fry", "healthy"],
+    "ingredients": [
+      {
+        "amount": 2,
+        "unit": "tablespoons",
+        "optional": false,
+        "id": "60d25f6dc5367256"
+      },
+      {
+        "amount": 1,
+        "unit": "tablespoon",
+        "optional": false,
+        "id": "60d25f73125ed78d"
+      },
+      {
+        "amount": 3,
+        "unit": "cups",
+        "optional": false,
+        "id": "60d25f7ab89678d3"
+      },
+      {
+        "amount": 1,
+        "unit": "cup",
+        "optional": true,
+        "id": "60d25f822d8cb7de"
+      }
+    ],
+    "steps": [
+      "Chop all the vegetables into bite-sized pieces.",
+      "Heat oil in a large skillet or wok over medium-high heat.",
+      "Add garlic and ginger to the skillet, and cook for 1 minute.",
+      "Add the vegetables and stir-fry for 5-7 minutes, or until tender.",
+      "If using, add tofu or tempeh, and cook for an additional 3 minutes.",
+      "Serve hot, over rice or noodles, if desired."
+    ],
+    "basedOn": "60d25f41254a79325d"
+  }
+]
