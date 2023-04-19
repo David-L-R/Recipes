@@ -1,15 +1,12 @@
-import { Schema, model } from "mongoose";
+import mongoose from "mongoose";
 
-const { Types } = Schema;
-const { ObjectId } = Types;
-
-const recipeSchema = Schema({
+const recipeSchema = mongoose.Schema({
   title: {
     type: String,
     required: [true, "Recipe title is required"],
   },
   userId: {
-    type: ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     required: [true, "User ID is required"],
   },
   time: {
@@ -22,20 +19,16 @@ const recipeSchema = Schema({
     },
   },
   servings: Number,
-  tags: [String],
   ingredients: [
     {
       amount: Number,
       unit: String,
-      optional: Boolean,
       id: {
-        type: ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         required: [true, "Ingredient ID is required"],
       },
     },
   ],
-  steps: [String],
-  basedOn: ObjectId,
 });
 
-export default model("Recipe", recipeSchema);
+export default mongoose.model("Recipe", recipeSchema);
