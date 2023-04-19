@@ -1,17 +1,14 @@
 import { Schema, model } from "mongoose";
 
-const { ObjectId } = ({ Types } = Schema);
-// const { ObjectId } = Types;
-
-const recipeSchema = Schema({
+const ingredientSchema = Schema({
   singular: {
     type: String,
-    required: [true, "Recipe title is required"],
+    required: [true, "sigular form is required"],
   },
   plural: {
     type: String,
-    required: [true, "User ID is required"],
+    required: [true, "Plural form is required"],
   },
 });
 
-export default model("Recipe", recipeSchema);
+export default model("Ingredient", ingredientSchema);
