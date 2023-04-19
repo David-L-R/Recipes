@@ -21,6 +21,8 @@ DBconnect();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+const populateDatabase = () => {};
+
 // ROUTES
 app.use("/api/recipes", recipesRouter);
 app.use("/api/auth", authRouter);
