@@ -10,6 +10,7 @@ const recipeSchema = Schema({
   },
   userId: {
     type: ObjectId,
+    ref: "User",
     required: [true, "User ID is required"],
   },
   time: {
@@ -30,6 +31,7 @@ const recipeSchema = Schema({
       optional: Boolean,
       id: {
         type: ObjectId,
+        ref: "Ingredient",
         required: [true, "Ingredient ID is required"],
       },
     },
