@@ -9,7 +9,7 @@ const recipeSchema = Schema({
     required: [true, "Recipe title is required"],
   },
   plural: {
-    type: ObjectId,
+    type: String,
     required: [true, "User ID is required"],
   },
 });
