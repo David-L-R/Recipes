@@ -5,6 +5,7 @@ import { DBconnect } from "./config/db.js";
 import { config } from "./config/index.js";
 import { errorHandler } from "./middleware/errorMiddleware.js";
 import cors from "cors";
+import ingredientsRouter from "./routes/IngredientsRouter.js";
 
 // init express application
 const app = express();
@@ -21,8 +22,11 @@ DBconnect();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+const populateDatabase = () => {};
+
 // ROUTES
 app.use("/api/recipes", recipesRouter);
+app.use("/api/ingredients", ingredientsRouter);
 app.use("/api/auth", authRouter);
 
 app.use(errorHandler);

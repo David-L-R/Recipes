@@ -1,0 +1,92 @@
+[
+  {
+    "title": "Chicken Stir Fry",
+    "userId": "6436b6140c2e8a24f1848ec9",
+    "time": {
+      "prepTime": 15,
+      "cookTime": 30
+    },
+    "servings": 4,
+    "tags": ["dinner", "Main Dish", "chicken"],
+    "ingredients": [
+      {
+        "amount": 2,
+        "unit": "pieces",
+        "optional": false,
+        "id": "645bb6028816ff0378358e8f"
+      },
+      {
+        "amount": 1,
+        "unit": "cup",
+        "optional": false,
+        "id": "645bb6028816ff0378358e8a"
+      },
+      {
+        "amount": 1,
+        "unit": "piece",
+        "optional": false,
+        "id": "645bb6028816ff0378358e89"
+      },
+      {
+        "amount": 1,
+        "unit": "piece",
+        "optional": false,
+        "id": "645bb6028816ff0378358e93"
+      }
+    ],
+    "steps": [
+      "Cut chicken into thin slices.",
+      "Prepare the vegetables.",
+      "Heat oil in a pan.",
+      "Cook the chicken until it's no longer pink.",
+      "Add the vegetables and stir fry until they're tender.",
+      "Serve over rice."
+    ],
+    "basedOn": null
+  },
+  {
+    "title": "Vegetable Soup",
+    "userId": "6436b6140c2e8a24f1848ec9",
+    "time": {
+      "prepTime": 10,
+      "cookTime": 40
+    },
+    "servings": 4,
+    "tags": ["lunch", "soup", "vegetarian"],
+    "ingredients": [
+      {
+        "amount": 2,
+        "unit": "pieces",
+        "optional": false,
+        "id": "645bb6028816ff0378358e8b"
+      },
+      {
+        "amount": 2,
+        "unit": "pieces",
+        "optional": false,
+        "id": "645bb6028816ff0378358e8c"
+      },
+      {
+        "amount": 2,
+        "unit": "pieces",
+        "optional": false,
+        "id": "645bb6028816ff0378358e8e"
+      },
+      {
+        "amount": 1,
+        "unit": "piece",
+        "optional": false,
+        "id": "645bb6028816ff0378358e89"
+      }
+    ],
+    "steps": [
+      "Chop all the vegetables into small pieces.",
+      "Heat oil in a pot.",
+      "Add the vegetables and cook until they're soft.",
+      "Add water and bring to a boil.",
+      "Reduce heat and simmer for 30 minutes.",
+      "Serve hot."
+    ],
+    "basedOn": null
+  }
+]
