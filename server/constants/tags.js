@@ -27,6 +27,19 @@ const allergy = [
   "Wheat Free",
 ];
 
+const meats = [
+  "chicken",
+  "beef",
+  "pork",
+  "lamb",
+  "turkey",
+  "duck",
+  "goose",
+  "rabbit",
+  "birdd",
+  "fish",
+];
+
 const cuisine = [
   "American",
   "Asian",

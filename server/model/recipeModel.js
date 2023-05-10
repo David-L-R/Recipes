@@ -22,7 +22,10 @@ const recipeSchema = Schema({
       type: Number,
     },
   },
-  servings: Number,
+  servings: {
+    type: Number,
+    required: [true, "Servings is required"],
+  },
   tags: [String],
   ingredients: [
     {
@@ -37,7 +40,10 @@ const recipeSchema = Schema({
     },
   ],
   steps: [String],
-  basedOn: ObjectId,
+  basedOn: {
+    type: ObjectId,
+    ref: "Recipe",
+  },
 });
 
 export default model("Recipe", recipeSchema);

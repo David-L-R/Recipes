@@ -7,6 +7,7 @@ import {
   createRecipe,
   updateRecipe,
   deleteRecipe,
+  // createRecipes,
 } from "../controller/recipesController.js";
 const router = express.Router();
 
@@ -19,5 +20,8 @@ router
   .get(getRecipeById)
   .put(validateToken, updateRecipe)
   .delete(validateToken, deleteRecipe);
+
+// FOR ADMIN USE ONLY
+// router.route("/enter_all_recipes").post(createRecipes);
 
 export default router;

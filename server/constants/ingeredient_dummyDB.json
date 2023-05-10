@@ -1,37 +1,102 @@
 [
-  { "singular": "onion", "plural": "onions" },
-  { "singular": "rice", "plural": "rice" },
-  { "singular": "tomato", "plural": "tomatoes" },
-  { "singular": "potato", "plural": "potatoes" },
-  { "singular": "egg", "plural": "eggs" },
-  { "singular": "carrot", "plural": "carrots" },
-  { "singular": "chicken", "plural": "chicken" },
-  { "singular": "beef", "plural": "beef" },
-  { "singular": "pork", "plural": "pork" },
-  { "singular": "mushroom", "plural": "mushrooms" },
-  { "singular": "bell pepper", "plural": "bell peppers" },
-  { "singular": "cabbage", "plural": "cabbage" },
-  { "singular": "lettuce", "plural": "lettuce" },
-  { "singular": "cucumber", "plural": "cucumbers" },
-  { "singular": "garlic", "plural": "garlic" },
-  { "singular": "spinach", "plural": "spinach" },
-  { "singular": "zucchini", "plural": "zucchini" },
-  { "singular": "broccoli", "plural": "broccoli" },
-  { "singular": "cauliflower", "plural": "cauliflower" },
-  { "singular": "corn", "plural": "corn" },
-  { "singular": "pea", "plural": "peas" },
-  { "singular": "bean", "plural": "beans" },
-  { "singular": "lentil", "plural": "lentils" },
-  { "singular": "chickpea", "plural": "chickpeas" },
-  { "singular": "olive", "plural": "olives" },
-  { "singular": "avocado", "plural": "avocados" },
-  { "singular": "lemon", "plural": "lemons" },
-  { "singular": "lime", "plural": "limes" },
-  { "singular": "orange", "plural": "oranges" },
-  { "singular": "apple", "plural": "apples" },
-  { "singular": "banana", "plural": "bananas" },
-  { "singular": "grape", "plural": "grapes" },
-  { "singular": "strawberry", "plural": "strawberries" },
-  { "singular": "blueberry", "plural": "blueberries" },
-  { "singular": "raspberry", "plural": "raspberries" }
+  {
+    "id": "645bb6028816ff0378358e89",
+    "singular": "onion",
+    "plural": "onions"
+  },
+  {
+    "id": "645bb6028816ff0378358e8a",
+    "singular": "rice",
+    "plural": "rice"
+  },
+  {
+    "id": "645bb6028816ff0378358e8b",
+    "singular": "tomato",
+    "plural": "tomatoes"
+  },
+  {
+    "id": "645bb6028816ff0378358e8c",
+    "singular": "potato",
+    "plural": "potatoes"
+  },
+  {
+    "id": "645bb6028816ff0378358e8d",
+    "singular": "egg",
+    "plural": "eggs"
+  },
+  {
+    "id": "645bb6028816ff0378358e8e",
+    "singular": "carrot",
+    "plural": "carrots"
+  },
+  {
+    "id": "645bb6028816ff0378358e8f",
+    "singular": "chicken",
+    "plural": "chicken"
+  },
+  {
+    "id": "645bb6028816ff0378358e90",
+    "singular": "beef",
+    "plural": "beef"
+  },
+  {
+    "id": "645bb6028816ff0378358e91",
+    "singular": "pork",
+    "plural": "pork"
+  },
+  {
+    "id": "645bb6028816ff0378358e92",
+    "singular": "mushroom",
+    "plural": "mushrooms"
+  },
+  {
+    "id": "645bb6028816ff0378358e93",
+    "singular": "bell pepper",
+    "plural": "bell peppers"
+  },
+  {
+    "id": "645bb6028816ff0378358e94",
+    "singular": "cabbage",
+    "plural": "cabbage"
+  },
+  {
+    "id": "645bb6028816ff0378358e95",
+    "singular": "lettuce",
+    "plural": "lettuce"
+  },
+  {
+    "id": "645bb6028816ff0378358e96",
+    "singular": "cucumber",
+    "plural": "cucumbers"
+  },
+  {
+    "id": "645bb6028816ff0378358e97",
+    "singular": "garlic",
+    "plural": "garlic"
+  },
+  {
+    "id": "645bb6028816ff0378358e98",
+    "singular": "spinach",
+    "plural": "spinach"
+  },
+  {
+    "id": "645bb6028816ff0378358e99",
+    "singular": "zucchini",
+    "plural": "zucchini"
+  },
+  {
+    "id": "645bb6028816ff0378358e9a",
+    "singular": "broccoli",
+    "plural": "broccoli"
+  },
+  {
+    "id": "645bb6028816ff0378358e9b",
+    "singular": "cauliflower",
+    "plural": "cauliflower"
+  },
+  {
+    "id": "645bb6028816ff0378358e9c",
+    "singular": "corn",
+    "plural": "corn"
+  }
 ]
