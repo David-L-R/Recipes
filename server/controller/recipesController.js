@@ -11,7 +11,7 @@ export const getRecipeById = asyncHandler(async (req, res) => {
 
   const recipe = await Recipe.findById(id);
 
-  res.json(recipe);
+  res.status(200).json(recipe);
 });
 
 export const createRecipe = asyncHandler(async (req, res) => {
@@ -56,7 +56,7 @@ export const updateRecipe = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const { user } = req;
 
-  const query = { _id: id, userId: user._id };
+  const query = { _id: id, userId: user.id };
   const update = { $set: req.body };
   const options = { new: true };
 
@@ -83,7 +83,7 @@ export const deleteRecipe = asyncHandler(async (req, res) => {
     throw new Error("Recipe not found");
   }
 
-  res.json({ message: "Recipe deleted" });
+  res.status(202).json({ message: "Recipe deleted" });
 });
 
 // FOR ADMIN USE ONLY

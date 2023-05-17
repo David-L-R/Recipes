@@ -12,13 +12,16 @@ import {
 const router = express.Router();
 
 // api/recipes/
-router.route("/").get(getAllRecipes).post(validateToken, createRecipe);
+router
+  .route("/")
+  .get(validateToken, getAllRecipes)
+  .post(validateToken, createRecipe);
 
 // api/recipes/:id
 router
   .route("/:id")
-  .get(getRecipeById)
-  .put(validateToken, updateRecipe)
+  .get(validateToken, getRecipeById)
+  .patch(validateToken, updateRecipe)
   .delete(validateToken, deleteRecipe);
 
 // FOR ADMIN USE ONLY

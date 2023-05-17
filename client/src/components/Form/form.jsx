@@ -1,5 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import "./form.css";
 
 export const Form = ({ inputs, action, optinalValues }) => {
   const error = useSelector((state) => state.auth.error);
