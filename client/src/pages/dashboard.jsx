@@ -6,6 +6,7 @@ import {
   getRecipes,
   updateRecipe,
 } from "../services/recipes/recipeSlice";
+import { Auth } from "../components/Auth/Auth";
 
 export const Dashboard = () => {
   const dispatch = useDispatch();

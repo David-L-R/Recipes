@@ -28,6 +28,7 @@ export const Login = () => {
   ];
 
   useEffect(() => {
+    console.log(user, token);
     if (user && token) {
       navigate("/dashboard");
     }
