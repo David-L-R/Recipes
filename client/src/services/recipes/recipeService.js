@@ -1,17 +1,12 @@
-const resetPassword = async ({ password, confirmPassword, token }) => {
-  if (password !== confirmPassword) {
-    throw new Error("Passwords do not match");
-  }
-
+const getRecipes = async ({ token }) => {
   const response = await fetch(
-    `${process.env.REACT_APP_SERVER_URL}/api/auth/reset-password`,
+    `${process.env.REACT_APP_SERVER_URL}/api/recipes/`,
     {
-      method: "PATCH",
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ password }),
     }
   );
 
@@ -26,19 +21,23 @@ const resetPassword = async ({ password, confirmPassword, token }) => {
   return data;
 };
 
-const forgotPassword = async (email) => {
+const getByID = async ({ id, token }) => {
+  console.log("id", id);
+
   const response = await fetch(
-    `${process.env.REACT_APP_SERVER_URL}/api/auth/forgot-password`,
+    `${process.env.REACT_APP_SERVER_URL}/api/recipes/${id}`,
     {
-      method: "POST",
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify(email),
     }
   );
 
   const data = await response.json();
+
+  console.log(response.status);
 
   if (response.status !== 200) {
     throw new Error(data.message);
@@ -47,15 +46,16 @@ const forgotPassword = async (email) => {
   return data;
 };
 
-const register = async (user) => {
+const createRecipe = async ({ token, recipe }) => {
   const response = await fetch(
-    `${process.env.REACT_APP_SERVER_URL}/api/auth/register`,
+    `${process.env.REACT_APP_SERVER_URL}/api/recipes/`,
     {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify(user),
+      body: JSON.stringify(recipe),
     }
   );
 
@@ -68,15 +68,17 @@ const register = async (user) => {
   return data;
 };
 
-const login = async (user) => {
+const updateRecipe = async ({ token, id, updatedRecipeFields }) => {
+  console.log("updatedRecipeFields", updatedRecipeFields);
   const response = await fetch(
-    `${process.env.REACT_APP_SERVER_URL}/api/auth/login`,
+    `${process.env.REACT_APP_SERVER_URL}/api/recipes/${id}`,
     {
-      method: "POST",
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify(user),
+      body: JSON.stringify(updatedRecipeFields),
     }
   );
 
@@ -89,11 +91,11 @@ const login = async (user) => {
   return data;
 };
 
-const getUserInfo = async (token) => {
+const deleteRecipe = async ({ token, id }) => {
   const response = await fetch(
-    `${process.env.REACT_APP_SERVER_URL}/api/auth/me`,
+    `${process.env.REACT_APP_SERVER_URL}/api/recipes/${id}`,
     {
-      method: "POST",
+      method: "DELETE",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
@@ -103,19 +105,19 @@ const getUserInfo = async (token) => {
 
   const data = await response.json();
 
-  if (response.status !== 200) {
+  if (response.status !== 202) {
     throw new Error(data.message);
   }
 
   return data;
 };
 
-const authService = {
-  getUserInfo,
-  register,
-  login,
-  forgotPassword,
-  resetPassword,
+const recipeService = {
+  getRecipes,
+  getByID,
+  createRecipe,
+  updateRecipe,
+  deleteRecipe,
 };
 
-export default authService;
+export default recipeService;

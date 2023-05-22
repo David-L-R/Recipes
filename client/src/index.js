@@ -13,6 +13,7 @@ import { Auth } from "./components/Auth/Auth";
 import { ForgotPassword } from "./pages/Forgot";
 import { Success } from "./pages/Success";
 import { ResetPassword } from "./pages/Reset";
+import { ChakraProvider } from "@chakra-ui/react";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
@@ -55,9 +56,11 @@ const router = createBrowserRouter([
 
 root.render(
   <React.StrictMode>
+    {/* <ChakraProvider> */}
     <Provider store={store}>
       <RouterProvider router={router} />
     </Provider>
+    {/* </ChakraProvider> */}
   </React.StrictMode>
 );
 

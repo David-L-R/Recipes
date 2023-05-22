@@ -2,13 +2,24 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import authService from "./authService";
 
 const initialState = {
-  user: JSON.parse(localStorage.getItem("user")) || null,
+  user: null,
   token: JSON.parse(localStorage.getItem("token")) || null,
   loading: false,
   error: false,
   success: false,
   message: "",
 };
+
+const getUserInfo = createAsyncThunk(
+  "auth/get-user-info",
+  async (_, { rejectWithValue }) => {
+    try {
+      return await authService.getUserInfo();
+    } catch (err) {
+      return rejectWithValue(err);
+    }
+  }
+);
 
 const resetPassword = createAsyncThunk(
   "auth/reset-password",
@@ -67,7 +78,6 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     logout: (state) => {
-      localStorage.removeItem("user");
       localStorage.removeItem("token");
       state.user = null;
       state.token = null;
@@ -82,8 +92,6 @@ export const authSlice = createSlice({
       state.loading = true;
     },
     [register.fulfilled]: (state, { payload }) => {
-      console.log("success", payload);
-      localStorage.setItem("user", JSON.stringify(payload.user));
       localStorage.setItem("token", JSON.stringify(payload.token));
       state.user = payload.user;
       state.token = payload.token;
@@ -102,7 +110,6 @@ export const authSlice = createSlice({
       state.loading = true;
     },
     [login.fulfilled]: (state, { payload }) => {
-      localStorage.setItem("user", JSON.stringify(payload.user));
       localStorage.setItem("token", JSON.stringify(payload.token));
       state.user = payload.user;
       state.token = payload.token;
@@ -147,10 +154,26 @@ export const authSlice = createSlice({
       state.error = true;
       state.message = payload.message;
     },
+    [getUserInfo.pending]: (state) => {
+      state.loading = true;
+    },
+    [getUserInfo.fulfilled]: (state, { payload }) => {
+      state.user = payload.user;
+      state.loading = false;
+      state.success = true;
+      state.error = false;
+      state.message = payload.message;
+    },
+    [getUserInfo.rejected]: (state, { payload }) => {
+      state.loading = false;
+      state.success = false;
+      state.error = true;
+      state.message = payload.message;
+    },
   },
 });
 
 const { logout } = authSlice.actions;
 
-export { login, register, logout, forgotPassword, resetPassword };
+export { login, register, logout, forgotPassword, resetPassword, getUserInfo };
 export default authSlice.reducer;
