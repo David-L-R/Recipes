@@ -1,12 +1,7 @@
 import React, { useEffect } from "react";
-import { Button } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getRecipeByID,
-  getRecipes,
-  updateRecipe,
-} from "../services/recipes/recipeSlice";
-import { Auth } from "../components/Auth/Auth";
+import { getRecipeByID, getRecipes } from "../services/recipes/recipeSlice";
+import { Recipe } from "../components/Recipe/Recipe";
 
 export const Dashboard = () => {
   const dispatch = useDispatch();
@@ -20,24 +15,11 @@ export const Dashboard = () => {
     <div>
       Hello
       {recipes.map((recipe) => (
-        <div key={recipe._id}>
-          <h1>{recipe.title}</h1>
-          <button onClick={() => dispatch(getRecipeByID({ id: recipe._id }))}>
-            Get Recipe By ID
-          </button>
-          <button
-            onClick={() =>
-              dispatch(
-                updateRecipe({
-                  id: recipe._id,
-                  updatedRecipeFields: { title: `New ${recipe.title}` },
-                })
-              )
-            }
-          >
-            Update Recipe
-          </button>
-        </div>
+        <Recipe
+          key={recipe._id}
+          recipe={recipe}
+          getById={() => dispatch(getRecipeByID({ id: recipe._id }))}
+        />
       ))}
     </div>
   );
