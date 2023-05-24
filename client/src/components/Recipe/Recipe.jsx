@@ -1,52 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Box, Image, Badge, Button } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
+import { pickRandomNumbers } from "./utils";
+import { colors } from "./constants";
 
 export const Recipe = ({ recipe, getById }) => {
-  const [colorsInd, setColorsInd] = useState([]);
-  const colors = [
-    "red",
-    "orange",
-    "yellow",
-    "green",
-    "teal",
-    "blue",
-    "cyan",
-    "purple",
-    "pink",
-    "gray",
-  ];
+  const [colorIndexes, setColorIndexes] = useState([]);
 
   useEffect(() => {
-    const colorIndexes = [];
-
-    const pickRandomColor = () => {
-      let numberIsUnique = false;
-      let randomIndex;
-
-      while (!numberIsUnique) {
-        randomIndex = Math.floor(Math.random() * colors.length);
-
-        console.log(recipe.title, colorIndexes, colors[randomIndex]);
-
-        if (colorIndexes.includes(randomIndex)) {
-          continue;
-        }
-
-        colorIndexes.push(randomIndex);
-
-        numberIsUnique = true;
-      }
-
-      return colors[randomIndex];
-    };
-
-    recipe.tags.forEach((_) => {
-      pickRandomColor();
-    });
-
-    setColorsInd(colorIndexes);
-  }, [recipe.tags]);
+    setColorIndexes(pickRandomNumbers(recipe.tags.length, colors.length));
+  }, []);
 
   return (
     <Box maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
@@ -59,7 +22,7 @@ export const Recipe = ({ recipe, getById }) => {
               <Badge
                 borderRadius='xl'
                 px='2'
-                colorScheme={colors[colorsInd[index]]}
+                colorScheme={colors[colorIndexes[index]]}
               >
                 {tag}
               </Badge>
