@@ -56,11 +56,11 @@ const router = createBrowserRouter([
 
 root.render(
   <React.StrictMode>
-    {/* <ChakraProvider> */}
-    <Provider store={store}>
-      <RouterProvider router={router} />
-    </Provider>
-    {/* </ChakraProvider> */}
+    <ChakraProvider>
+      <Provider store={store}>
+        <RouterProvider router={router} />
+      </Provider>
+    </ChakraProvider>
   </React.StrictMode>
 );
 

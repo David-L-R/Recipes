@@ -16,14 +16,10 @@ const getRecipes = async ({ token }) => {
     throw new Error(data.message);
   }
 
-  console.log("data", data);
-
   return data;
 };
 
 const getByID = async ({ id, token }) => {
-  console.log("id", id);
-
   const response = await fetch(
     `${process.env.REACT_APP_SERVER_URL}/api/recipes/${id}`,
     {
@@ -36,8 +32,6 @@ const getByID = async ({ id, token }) => {
   );
 
   const data = await response.json();
-
-  console.log(response.status);
 
   if (response.status !== 200) {
     throw new Error(data.message);

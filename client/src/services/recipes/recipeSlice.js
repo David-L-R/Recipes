@@ -16,7 +16,7 @@ const getRecipes = createAsyncThunk(
     try {
       return await recipeService.getRecipes({ token: getState().auth.token });
     } catch (err) {
-      console.log(err);
+      console.error(err);
       return rejectWithValue(err);
     }
   }
@@ -31,7 +31,7 @@ const getRecipeByID = createAsyncThunk(
         token: getState().auth.token,
       });
     } catch (err) {
-      console.log(err);
+      console.error(err);
       return rejectWithValue(err);
     }
   }
@@ -46,7 +46,7 @@ const createRecipe = createAsyncThunk(
         token: getState().auth.token,
       });
     } catch (err) {
-      console.log(err);
+      console.error(err);
       return rejectWithValue(err);
     }
   }
@@ -62,7 +62,7 @@ const updateRecipe = createAsyncThunk(
         token: getState().auth.token,
       });
     } catch (err) {
-      console.log(err);
+      console.error(err);
       return rejectWithValue(err);
     }
   }
@@ -77,7 +77,7 @@ const deleteRecipe = createAsyncThunk(
         token: getState().auth.token,
       });
     } catch (err) {
-      console.log(err);
+      console.error(err);
       return rejectWithValue(err);
     }
   }
