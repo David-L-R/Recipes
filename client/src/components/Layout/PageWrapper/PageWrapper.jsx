@@ -1,7 +1,7 @@
 import React from "react";
 import { Navbar } from "../Navbar/Navbar";
+import styled from "styled-components";
 import {
-  Button,
   Drawer,
   DrawerBody,
   DrawerCloseButton,
@@ -9,11 +9,18 @@ import {
   DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
-  Input,
   Text,
   useDisclosure,
-  useRadio,
 } from "@chakra-ui/react";
+
+const Body = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+  gap: 20px;
+`;
 
 export const PageWrapper = ({ children }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -43,7 +50,7 @@ export const PageWrapper = ({ children }) => {
           <DrawerFooter>Logout</DrawerFooter>
         </DrawerContent>
       </Drawer>
-      {children}
+      <Body>{children}</Body>
     </>
   );
 };
