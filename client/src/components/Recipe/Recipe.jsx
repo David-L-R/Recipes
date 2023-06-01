@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Box, Image, Badge, Button } from "@chakra-ui/react";
-import { StarIcon } from "@chakra-ui/icons";
+// import { StarIcon } from "@chakra-ui/icons";
 import { pickRandomNumbers } from "./utils";
 import { colors } from "./constants";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { ReactComponent as RedPizza } from "../../assets/pizza-slice-solid-red.svg";
+import { ReactComponent as GrayPizza } from "../../assets/pizza-slice-solid.svg";
 
 export const Recipe = ({ recipe, getById }) => {
   const [colorIndexes, setColorIndexes] = useState([]);
@@ -10,6 +13,30 @@ export const Recipe = ({ recipe, getById }) => {
   useEffect(() => {
     setColorIndexes(pickRandomNumbers(recipe.tags.length, colors.length));
   }, []);
+
+  const renderDifficulty = () => {
+    const difficulty = {};
+    switch (recipe.difficulty) {
+      case 1:
+        difficulty.text = "Beginner";
+        difficulty.color = "green";
+        break;
+      case 2:
+        difficulty.text = "Intermediate";
+        difficulty.color = "yellow";
+        break;
+      default:
+        difficulty.text = "Advanced";
+        difficulty.color = "red";
+        break;
+    }
+
+    return (
+      <Badge borderRadius='l' px='4' colorScheme={difficulty.color}>
+        {difficulty.text}
+      </Badge>
+    );
+  };
 
   return (
     <Box maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
@@ -55,20 +82,14 @@ export const Recipe = ({ recipe, getById }) => {
         <Box>{recipe.description}</Box>
 
         <Box display='flex' mt='2' alignItems='center'>
-          <Box as='span' ml='2' color='gray.600' fontSize='sm'>
-            Difficulty
-          </Box>
-          {Array(5)
-            .fill("")
-            .map((_, i) => (
-              <StarIcon
-                key={i}
-                color={i < recipe.difficulty ? "teal.500" : "gray.300"}
-              />
-            ))}
+          {renderDifficulty()}
         </Box>
 
-        <Button onClick={getById}>Get Recipe By ID</Button>
+        <Box display='flex' flexDirection='row-reverse'>
+          <Button onClick={getById} colorScheme='teal'>
+            Read More
+          </Button>
+        </Box>
       </Box>
     </Box>
   );
