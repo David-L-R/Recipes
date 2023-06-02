@@ -6,14 +6,17 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Register } from "./pages/Register";
-import { Login } from "./pages/Login";
-import { Dashboard } from "./pages/Dashboard";
-import { Auth } from "./components/Auth/Auth";
-import { ForgotPassword } from "./pages/Forgot";
-import { Success } from "./pages/Success";
-import { ResetPassword } from "./pages/Reset";
 import { ChakraProvider } from "@chakra-ui/react";
+
+import { Auth } from "./components/Auth/Auth";
+import { Dashboard, Recipe } from "./pages/Dashboard";
+import {
+  ForgotPassword,
+  Login,
+  Register,
+  ResetPassword,
+  Success,
+} from "./pages/Auth";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
@@ -49,6 +52,14 @@ const router = createBrowserRouter([
       // HOC Higher Order Component is an alternative
       <Auth>
         <Dashboard />
+      </Auth>
+    ),
+  },
+  {
+    path: "/dashboard/recipe/:id",
+    element: (
+      <Auth>
+        <Recipe />
       </Auth>
     ),
   },

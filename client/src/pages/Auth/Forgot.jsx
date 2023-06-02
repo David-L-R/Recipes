@@ -2,8 +2,8 @@ import React, { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 // import { forgotPassword } from "../services/auth/authSlice";
-import { Form } from "../components";
-import { forgotPassword } from "../services/auth/authSlice";
+import { Form } from "../../components";
+import { forgotPassword } from "../../services/auth/authSlice";
 
 export const ForgotPassword = () => {
   const { success, loading, token, user } = useSelector((state) => state.auth);

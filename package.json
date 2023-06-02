@@ -32,6 +32,7 @@
   },
   "type": "module",
   "devDependencies": {
+    "babel-plugin-module-resolver": "^5.0.0",
     "concurrently": "^7.6.0"
   }
 }
